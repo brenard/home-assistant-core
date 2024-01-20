@@ -206,3 +206,81 @@ class FormaldehydeConcentrationClusterHandler(ClusterHandler):
             config=(REPORT_CONFIG_MIN_INT, REPORT_CONFIG_MAX_INT, 0.000001),
         ),
     )
+
+
+@registries.ZIGBEE_CLUSTER_HANDLER_REGISTRY.register(
+    measurement.ChlorineConcentration.cluster_id
+)
+class ChlorineConcentration(ClusterHandler):
+    """Chlorine measurement cluster handler."""
+
+    REPORT_CONFIG = (
+        AttrReportConfig(
+            attr="measured_value",
+            config=(REPORT_CONFIG_MIN_INT, REPORT_CONFIG_MAX_INT, 0.000001),
+        ),
+    )
+
+
+@registries.ZIGBEE_CLUSTER_HANDLER_REGISTRY.register(
+    measurement.ElectricalConductivity.cluster_id
+)
+class ElectricalConductivity(ClusterHandler):
+    """Electrical Conductivity measurement cluster handler."""
+
+    REPORT_CONFIG = (
+        AttrReportConfig(
+            attr="measured_value",
+            config=(REPORT_CONFIG_MIN_INT, REPORT_CONFIG_MAX_INT, 1),
+        ),
+    )
+
+
+@registries.ZIGBEE_CLUSTER_HANDLER_REGISTRY.register(0x42F)
+class ORP(ClusterHandler):
+    """Oxido-reduction measurement cluster handler."""
+
+    REPORT_CONFIG = (
+        AttrReportConfig(
+            attr="measured_value",
+            config=(REPORT_CONFIG_MIN_INT, REPORT_CONFIG_MAX_INT, 0.000001),
+        ),
+    )
+
+
+@registries.ZIGBEE_CLUSTER_HANDLER_REGISTRY.register(
+    measurement.SodiumConcentration.cluster_id
+)
+class SodiumConcentration(ClusterHandler):
+    """Sodium concentration measurement cluster handler."""
+
+    REPORT_CONFIG = (
+        AttrReportConfig(
+            attr="measured_value",
+            config=(REPORT_CONFIG_MIN_INT, REPORT_CONFIG_MAX_INT, 0.000001),
+        ),
+    )
+
+
+@registries.ZIGBEE_CLUSTER_HANDLER_REGISTRY.register(measurement.PH.cluster_id)
+class PH(ClusterHandler):
+    """PH measurement cluster handler."""
+
+    REPORT_CONFIG = (
+        AttrReportConfig(
+            attr="measured_value",
+            config=(REPORT_CONFIG_MIN_INT, REPORT_CONFIG_MAX_INT, 0.1),
+        ),
+    )
+
+
+@registries.ZIGBEE_CLUSTER_HANDLER_REGISTRY.register(0x0430)
+class TotalDissolvedSolids(ClusterHandler):
+    """Total Dissolved Solids measurement cluster handler."""
+
+    REPORT_CONFIG = (
+        AttrReportConfig(
+            attr="measured_value",
+            config=(REPORT_CONFIG_MIN_INT, REPORT_CONFIG_MAX_INT, 0.000001),
+        ),
+    )
