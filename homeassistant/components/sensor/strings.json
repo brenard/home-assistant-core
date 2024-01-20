@@ -6,6 +6,7 @@
       "is_aqi": "Current {entity_name} air quality index",
       "is_atmospheric_pressure": "Current {entity_name} atmospheric pressure",
       "is_battery_level": "Current {entity_name} battery level",
+      "is_chlorine": "Current {entity_name} chlorine concentration level",
       "is_carbon_monoxide": "Current {entity_name} carbon monoxide concentration level",
       "is_carbon_dioxide": "Current {entity_name} carbon dioxide concentration level",
       "is_current": "Current {entity_name} current",
@@ -13,6 +14,7 @@
       "is_data_size": "Current {entity_name} data size",
       "is_distance": "Current {entity_name} distance",
       "is_duration": "Current {entity_name} duration",
+      "is_electrical_conductivity": "Current {entity_name} electrical conductivity",
       "is_energy": "Current {entity_name} energy",
       "is_frequency": "Current {entity_name} frequency",
       "is_gas": "Current {entity_name} gas",
@@ -24,6 +26,7 @@
       "is_nitrogen_dioxide": "Current {entity_name} nitrogen dioxide concentration level",
       "is_nitrogen_monoxide": "Current {entity_name} nitrogen monoxide concentration level",
       "is_nitrous_oxide": "Current {entity_name} nitrous oxide concentration level",
+      "is_redox_potential": "Current {entity_name} oxido-reduction potential",
       "is_ozone": "Current {entity_name} ozone concentration level",
       "is_ph": "Current {entity_name} pH level",
       "is_pm1": "Current {entity_name} PM1 concentration level",
@@ -36,9 +39,11 @@
       "is_pressure": "Current {entity_name} pressure",
       "is_reactive_power": "Current {entity_name} reactive power",
       "is_signal_strength": "Current {entity_name} signal strength",
+      "is_sodium": "Current {entity_name} sodium concentration level",
       "is_sound_pressure": "Current {entity_name} sound pressure",
       "is_speed": "Current {entity_name} speed",
       "is_sulphur_dioxide": "Current {entity_name} sulphur dioxide concentration level",
+      "is_total_dissolved_solids": "Current {entity_name} total dissolved solids concentration level",
       "is_temperature": "Current {entity_name} temperature",
       "is_value": "Current {entity_name} value",
       "is_volatile_organic_compounds": "Current {entity_name} volatile organic compounds concentration level",
@@ -55,6 +60,7 @@
       "aqi": "{entity_name} air quality index changes",
       "atmospheric_pressure": "{entity_name} atmospheric pressure changes",
       "battery_level": "{entity_name} battery level changes",
+      "chlorine": "{entity_name} chlorine concentration changes",
       "carbon_monoxide": "{entity_name} carbon monoxide concentration changes",
       "carbon_dioxide": "{entity_name} carbon dioxide concentration changes",
       "current": "{entity_name} current changes",
@@ -62,6 +68,7 @@
       "data_size": "{entity_name} data size changes",
       "distance": "{entity_name} distance changes",
       "duration": "{entity_name} duration changes",
+      "electrical_conductivity": "{entity_name} electrical conductivity changes",
       "energy": "{entity_name} energy changes",
       "frequency": "{entity_name} frequency changes",
       "gas": "{entity_name} gas changes",
@@ -73,6 +80,7 @@
       "nitrogen_dioxide": "{entity_name} nitrogen dioxide concentration changes",
       "nitrogen_monoxide": "{entity_name} nitrogen monoxide concentration changes",
       "nitrous_oxide": "{entity_name} nitrous oxide concentration changes",
+      "redox_potential": "{entity_name} oxido-reduction potential changes",
       "ozone": "{entity_name} ozone concentration changes",
       "ph": "{entity_name} pH level changes",
       "pm1": "{entity_name} PM1 concentration changes",
@@ -85,9 +93,11 @@
       "pressure": "{entity_name} pressure changes",
       "reactive_power": "{entity_name} reactive power changes",
       "signal_strength": "{entity_name} signal strength changes",
+      "sodium": "{entity_name} sodium concentration changes",
       "sound_pressure": "{entity_name} sound pressure changes",
       "speed": "{entity_name} speed changes",
       "sulphur_dioxide": "{entity_name} sulphur dioxide concentration changes",
+      "total_dissolved_solids": "{entity_name} total dissolved solids concentration changes",
       "temperature": "{entity_name} temperature changes",
       "value": "{entity_name} value changes",
       "volatile_organic_compounds": "{entity_name} volatile organic compounds concentration changes",
@@ -142,6 +152,9 @@
     "battery": {
       "name": "Battery"
     },
+    "chlorine": {
+      "name": "Chlorine"
+    },
     "carbon_monoxide": {
       "name": "Carbon monoxide"
     },
@@ -159,6 +172,9 @@
     },
     "distance": {
       "name": "Distance"
+    },
+    "electrical_conductivity": {
+      "name": "Electrical conductivity"
     },
     "energy": {
       "name": "Energy"
@@ -199,6 +215,9 @@
     "nitrous_oxide": {
       "name": "Nitrous oxide"
     },
+    "redox_potential": {
+      "name": "Oxido-reduction potential"
+    },
     "ozone": {
       "name": "Ozone"
     },
@@ -235,6 +254,9 @@
     "signal_strength": {
       "name": "Signal strength"
     },
+    "sodium": {
+      "name": "Sodium"
+    },
     "sound_pressure": {
       "name": "Sound pressure"
     },
@@ -243,6 +265,9 @@
     },
     "sulphur_dioxide": {
       "name": "Sulphur dioxide"
+    },
+    "total_dissolved_solids": {
+      "name": "Total dissolved solids"
     },
     "temperature": {
       "name": "Temperature"
