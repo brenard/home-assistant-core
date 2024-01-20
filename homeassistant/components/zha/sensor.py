@@ -27,6 +27,7 @@ from homeassistant.components.sensor import (
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
+    CONCENTRATION_MILLIGRAMS_PER_LITER,
     CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
     CONCENTRATION_PARTS_PER_BILLION,
     CONCENTRATION_PARTS_PER_MILLION,
@@ -36,6 +37,7 @@ from homeassistant.const import (
     EntityCategory,
     Platform,
     UnitOfApparentPower,
+    UnitOfElectricalConductivity,
     UnitOfElectricCurrent,
     UnitOfElectricPotential,
     UnitOfEnergy,
@@ -569,7 +571,7 @@ class ElectricalMeasurementFrequency(PolledElectricalMeasurement):
 
 @MULTI_MATCH(cluster_handler_names=CLUSTER_HANDLER_ELECTRICAL_MEASUREMENT)
 # pylint: disable-next=hass-invalid-inheritance # needs fixing
-class ElectricalMeasurementPowerFactor(PolledElectricalMeasurement):
+class ElectricalMeasurementPowerFactor(ElectricalMeasurement):
     """Power Factor measurement."""
 
     _attribute_name = "power_factor"
@@ -1000,7 +1002,11 @@ class Pressure(Sensor):
     _attr_native_unit_of_measurement = UnitOfPressure.HPA
 
 
-@MULTI_MATCH(cluster_handler_names=CLUSTER_HANDLER_TEMPERATURE)
+@MULTI_MATCH(
+    cluster_handler_names=CLUSTER_HANDLER_TEMPERATURE,
+    models={"TS0601"},
+    manufacturers={"_TZE200_v1jqz5cy"},
+)
 # pylint: disable-next=hass-invalid-inheritance # needs fixing
 class Temperature(Sensor):
     """Temperature Sensor."""
@@ -1050,6 +1056,89 @@ class CarbonMonoxideConcentration(Sensor):
     _decimals = 0
     _multiplier = 1e6
     _attr_native_unit_of_measurement = CONCENTRATION_PARTS_PER_MILLION
+
+
+@MULTI_MATCH(cluster_handler_names="chlorine_concentration")
+# pylint: disable-next=hass-invalid-inheritance # needs fixing
+class ChlorineConcentration(Sensor):
+    """Chlorine Concentration sensor."""
+
+    _attribute_name = "measured_value"
+    _attr_device_class: SensorDeviceClass = SensorDeviceClass.CL
+    _attr_state_class: SensorStateClass = SensorStateClass.MEASUREMENT
+    _attr_icon = "mdi:water-percent"
+    _decimals = 0
+    _attr_native_unit_of_measurement = CONCENTRATION_MILLIGRAMS_PER_LITER
+    _unique_id_suffix = "chlorine"
+
+
+@MULTI_MATCH(cluster_handler_names="electrical_conductivity")
+# pylint: disable-next=hass-invalid-inheritance # needs fixing
+class ElectricalConductivity(Sensor):
+    """Electrical Conductivity sensor."""
+
+    _attribute_name = "measured_value"
+    _attr_device_class: SensorDeviceClass = SensorDeviceClass.ELECTRICAL_CONDUCTIVITY
+    _attr_state_class: SensorStateClass = SensorStateClass.MEASUREMENT
+    _attr_icon = "mdi:resistor"
+    _attr_native_unit_of_measurement = (
+        UnitOfElectricalConductivity.MICROSIEMENS_PER_CENTIMETER
+    )
+    _unique_id_suffix = "electrical_conductivity"
+
+
+@MULTI_MATCH(cluster_handler_names="ph")
+# pylint: disable-next=hass-invalid-inheritance # needs fixing
+class PH(Sensor):
+    """PH sensor."""
+
+    _attribute_name = "measured_value"
+    _attr_device_class: SensorDeviceClass = SensorDeviceClass.PH
+    _attr_state_class: SensorStateClass = SensorStateClass.MEASUREMENT
+    _divisor = 100
+    _attr_native_unit_of_measurement = None
+    _unique_id_suffix = "ph"
+
+
+@MULTI_MATCH(cluster_handler_names="sodium_concentration")
+# pylint: disable-next=hass-invalid-inheritance # needs fixing
+class SodiumConcentration(Sensor):
+    """Sodium Concentration sensor."""
+
+    _attribute_name = "measured_value"
+    _attr_device_class: SensorDeviceClass = SensorDeviceClass.SODIUM
+    _attr_state_class: SensorStateClass = SensorStateClass.MEASUREMENT
+    _attr_icon = "mdi:shaker"
+    _decimals = 0
+    _attr_native_unit_of_measurement = CONCENTRATION_PARTS_PER_MILLION
+    _unique_id_suffix = "sodium"
+
+
+@MULTI_MATCH(cluster_handler_names="redox_potential")
+# pylint: disable-next=hass-invalid-inheritance # needs fixing
+class RedoxPotential(Sensor):
+    """Oxydo-Reduction Potential sensor."""
+
+    _attribute_name = "measured_value"
+    _attr_device_class: SensorDeviceClass = SensorDeviceClass.ORP
+    _attr_state_class: SensorStateClass = SensorStateClass.MEASUREMENT
+    _attr_icon = "mdi:water-plus"
+    _attr_native_unit_of_measurement = UnitOfElectricPotential.MILLIVOLT
+    _unique_id_suffix = "redox_potential"
+
+
+@MULTI_MATCH(cluster_handler_names="total_dissolved_solids")
+# pylint: disable-next=hass-invalid-inheritance # needs fixing
+class TotalDissolvedSolids(Sensor):
+    """Total Dissolved Solids sensor."""
+
+    _attribute_name = "measured_value"
+    _attr_device_class: SensorDeviceClass = SensorDeviceClass.TOTAL_DISSOLVED_SOLIDS
+    _attr_state_class: SensorStateClass = SensorStateClass.MEASUREMENT
+    _attr_icon = "mdi:water-opacity"
+    _decimals = 0
+    _attr_native_unit_of_measurement = CONCENTRATION_PARTS_PER_MILLION
+    _unique_id_suffix = "total_dissolved_solids"
 
 
 @MULTI_MATCH(generic_ids="cluster_handler_0x042e", stop_on_match_group="voc_level")
