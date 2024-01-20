@@ -38,6 +38,7 @@ CONF_APPARENT_POWER = "apparent_power"
 CONF_AQI = "aqi"
 CONF_ATMOSPHERIC_PRESSURE = "atmospheric_pressure"
 CONF_BATTERY_LEVEL = "battery_level"
+CONF_CL = "chlorine"
 CONF_CO = "carbon_monoxide"
 CONF_CO2 = "carbon_dioxide"
 CONF_CURRENT = "current"
@@ -45,6 +46,7 @@ CONF_DATA_RATE = "data_rate"
 CONF_DATA_SIZE = "data_size"
 CONF_DISTANCE = "distance"
 CONF_DURATION = "duration"
+CONF_ELECTRICAL_CONDUCTIVITY = "electrical_conductivity"
 CONF_ENERGY = "energy"
 CONF_FREQUENCY = "frequency"
 CONF_GAS = "gas"
@@ -56,6 +58,7 @@ CONF_MONETARY = "monetary"
 CONF_NITROGEN_DIOXIDE = "nitrogen_dioxide"
 CONF_NITROGEN_MONOXIDE = "nitrogen_monoxide"
 CONF_NITROUS_OXIDE = "nitrous_oxide"
+CONF_ORP = "redox_potential"
 CONF_OZONE = "ozone"
 CONF_PH = "ph"
 CONF_PM1 = "pm1"
@@ -68,9 +71,11 @@ CONF_PRECIPITATION_INTENSITY = "precipitation_intensity"
 CONF_PRESSURE = "pressure"
 CONF_REACTIVE_POWER = "reactive_power"
 CONF_SIGNAL_STRENGTH = "signal_strength"
+CONF_SODIUM = "sodium"
 CONF_SOUND_PRESSURE = "sound_pressure"
 CONF_SPEED = "speed"
 CONF_SULPHUR_DIOXIDE = "sulphur_dioxide"
+CONF_TOTAL_DISSOLVED_SOLIDS = "total_dissolved_solids"
 CONF_TEMPERATURE = "temperature"
 CONF_VALUE = "value"
 CONF_VOLATILE_ORGANIC_COMPOUNDS = "volatile_organic_compounds"
@@ -87,6 +92,7 @@ ENTITY_TRIGGERS = {
     SensorDeviceClass.AQI: [{CONF_TYPE: CONF_AQI}],
     SensorDeviceClass.ATMOSPHERIC_PRESSURE: [{CONF_TYPE: CONF_ATMOSPHERIC_PRESSURE}],
     SensorDeviceClass.BATTERY: [{CONF_TYPE: CONF_BATTERY_LEVEL}],
+    SensorDeviceClass.CL: [{CONF_TYPE: CONF_CL}],
     SensorDeviceClass.CO: [{CONF_TYPE: CONF_CO}],
     SensorDeviceClass.CO2: [{CONF_TYPE: CONF_CO2}],
     SensorDeviceClass.CURRENT: [{CONF_TYPE: CONF_CURRENT}],
@@ -94,6 +100,7 @@ ENTITY_TRIGGERS = {
     SensorDeviceClass.DATA_SIZE: [{CONF_TYPE: CONF_DATA_SIZE}],
     SensorDeviceClass.DISTANCE: [{CONF_TYPE: CONF_DISTANCE}],
     SensorDeviceClass.DURATION: [{CONF_TYPE: CONF_DURATION}],
+    SensorDeviceClass.ELECTRICAL_CONDUCTIVITY: [{CONF_TYPE: CONF_ELECTRICAL_CONDUCTIVITY}],
     SensorDeviceClass.ENERGY: [{CONF_TYPE: CONF_ENERGY}],
     SensorDeviceClass.ENERGY_STORAGE: [{CONF_TYPE: CONF_ENERGY}],
     SensorDeviceClass.FREQUENCY: [{CONF_TYPE: CONF_FREQUENCY}],
@@ -106,6 +113,7 @@ ENTITY_TRIGGERS = {
     SensorDeviceClass.NITROGEN_DIOXIDE: [{CONF_TYPE: CONF_NITROGEN_DIOXIDE}],
     SensorDeviceClass.NITROGEN_MONOXIDE: [{CONF_TYPE: CONF_NITROGEN_MONOXIDE}],
     SensorDeviceClass.NITROUS_OXIDE: [{CONF_TYPE: CONF_NITROUS_OXIDE}],
+    SensorDeviceClass.ORP: [{CONF_TYPE: CONF_ORP}],
     SensorDeviceClass.OZONE: [{CONF_TYPE: CONF_OZONE}],
     SensorDeviceClass.PH: [{CONF_TYPE: CONF_PH}],
     SensorDeviceClass.PM1: [{CONF_TYPE: CONF_PM1}],
@@ -120,9 +128,11 @@ ENTITY_TRIGGERS = {
     SensorDeviceClass.PRESSURE: [{CONF_TYPE: CONF_PRESSURE}],
     SensorDeviceClass.REACTIVE_POWER: [{CONF_TYPE: CONF_REACTIVE_POWER}],
     SensorDeviceClass.SIGNAL_STRENGTH: [{CONF_TYPE: CONF_SIGNAL_STRENGTH}],
+    SensorDeviceClass.SODIUM: [{CONF_TYPE: CONF_SODIUM}],
     SensorDeviceClass.SOUND_PRESSURE: [{CONF_TYPE: CONF_SOUND_PRESSURE}],
     SensorDeviceClass.SPEED: [{CONF_TYPE: CONF_SPEED}],
     SensorDeviceClass.SULPHUR_DIOXIDE: [{CONF_TYPE: CONF_SULPHUR_DIOXIDE}],
+    SensorDeviceClass.TOTAL_DISSOLVED_SOLIDS: [{CONF_TYPE: CONF_TOTAL_DISSOLVED_SOLIDS}],
     SensorDeviceClass.TEMPERATURE: [{CONF_TYPE: CONF_TEMPERATURE}],
     SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS: [
         {CONF_TYPE: CONF_VOLATILE_ORGANIC_COMPOUNDS}
@@ -151,6 +161,7 @@ TRIGGER_SCHEMA = vol.All(
                     CONF_AQI,
                     CONF_ATMOSPHERIC_PRESSURE,
                     CONF_BATTERY_LEVEL,
+                    CONF_CL,
                     CONF_CO,
                     CONF_CO2,
                     CONF_CURRENT,
@@ -158,6 +169,7 @@ TRIGGER_SCHEMA = vol.All(
                     CONF_DATA_SIZE,
                     CONF_DISTANCE,
                     CONF_DURATION,
+                    CONF_ELECTRICAL_CONDUCTIVITY,
                     CONF_ENERGY,
                     CONF_FREQUENCY,
                     CONF_GAS,
@@ -169,6 +181,7 @@ TRIGGER_SCHEMA = vol.All(
                     CONF_NITROGEN_DIOXIDE,
                     CONF_NITROGEN_MONOXIDE,
                     CONF_NITROUS_OXIDE,
+                    CONF_ORP,
                     CONF_OZONE,
                     CONF_PH,
                     CONF_PM1,
@@ -181,9 +194,11 @@ TRIGGER_SCHEMA = vol.All(
                     CONF_PRESSURE,
                     CONF_REACTIVE_POWER,
                     CONF_SIGNAL_STRENGTH,
+                    CONF_SODIUM,
                     CONF_SOUND_PRESSURE,
                     CONF_SPEED,
                     CONF_SULPHUR_DIOXIDE,
+                    CONF_TOTAL_DISSOLVED_SOLIDS,
                     CONF_TEMPERATURE,
                     CONF_VOLATILE_ORGANIC_COMPOUNDS,
                     CONF_VOLATILE_ORGANIC_COMPOUNDS_PARTS,
