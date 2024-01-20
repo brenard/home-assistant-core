@@ -6,6 +6,8 @@ import functools
 import logging
 from typing import TYPE_CHECKING, Any, Self
 
+from zhaquirks.quirk_ids import TUYA_POOL_SENSOR
+
 from zigpy.quirks.v2 import WriteAttributeButtonMetadata, ZCLCommandButtonMetadata
 
 from homeassistant.components.button import ButtonDeviceClass, ButtonEntity
@@ -217,3 +219,16 @@ class AqaraSelfTestButton(ZHAAttributeButton):
     _attribute_value = 1
     _attr_entity_category = EntityCategory.CONFIG
     _attr_translation_key = "self_test"
+
+
+@CONFIG_DIAGNOSTIC_MATCH(
+    cluster_handler_names="tuya_manufacturer", quirk_ids=TUYA_POOL_SENSOR
+)
+class TuyaPoolSensorUpdateButton(ZHAAttributeButton):
+    """Defines a ZHA update button for the Tuya pool sensor."""
+
+    _unique_id_suffix = "update"
+    _attribute_name = "update"
+    _attribute_value = 1
+    _attr_entity_category = EntityCategory.CONFIG
+    _attr_translation_key = "update"
