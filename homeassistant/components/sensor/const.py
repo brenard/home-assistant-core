@@ -19,6 +19,7 @@ from homeassistant.const import (
     SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
     UnitOfApparentPower,
     UnitOfDataRate,
+    UnitOfElectricalConductivity,
     UnitOfElectricCurrent,
     UnitOfElectricPotential,
     UnitOfEnergy,
@@ -125,6 +126,11 @@ class SensorDeviceClass(StrEnum):
     Unit of measurement: `%`
     """
 
+    CL = "chlorine"
+    """Chlorine concentration.
+
+    Unit of measurement: `ppm` (parts per million)
+    """
     CO = "carbon_monoxide"
     """Carbon Monoxide gas concentration.
 
@@ -169,6 +175,11 @@ class SensorDeviceClass(StrEnum):
     Unit of measurement: `d`, `h`, `min`, `s`, `ms`
     """
 
+    ELECTRICAL_CONDUCTIVITY = "electrical_conductivity"
+    """Electrical Conductivity.
+
+    Unit of measurement: UnitOfElectricalConductivity
+    """
     ENERGY = "energy"
     """Energy.
 
@@ -252,6 +263,11 @@ class SensorDeviceClass(StrEnum):
     Unit of measurement: `µg/m³`
     """
 
+    ORP = "redox_potential"
+    """Oxydo-reduction potential.
+
+    Unit of measurement: `UnitOfElectricPotential`
+    """
     OZONE = "ozone"
     """Amount of O3.
 
@@ -332,6 +348,11 @@ class SensorDeviceClass(StrEnum):
     Unit of measurement: `dB`, `dBm`
     """
 
+    SODIUM = "sodium"
+    """Sodium concentration.
+
+    Unit of measurement: `ppm` (parts per million)
+    """
     SOUND_PRESSURE = "sound_pressure"
     """Sound pressure.
 
@@ -352,6 +373,12 @@ class SensorDeviceClass(StrEnum):
     """Amount of SO2.
 
     Unit of measurement: `µg/m³`
+    """
+
+    TOTAL_DISSOLVED_SOLIDS = "total_dissolved_solids"
+    """Total dissolved solids concentration.
+
+    Unit of measurement: `ppm`
     """
 
     TEMPERATURE = "temperature"
@@ -515,8 +542,10 @@ DEVICE_CLASS_UNITS: dict[SensorDeviceClass, set[type[StrEnum] | str | None]] = {
     SensorDeviceClass.AQI: {None},
     SensorDeviceClass.ATMOSPHERIC_PRESSURE: set(UnitOfPressure),
     SensorDeviceClass.BATTERY: {PERCENTAGE},
+    SensorDeviceClass.CL: {CONCENTRATION_PARTS_PER_MILLION},
     SensorDeviceClass.CO: {CONCENTRATION_PARTS_PER_MILLION},
     SensorDeviceClass.CO2: {CONCENTRATION_PARTS_PER_MILLION},
+    SensorDeviceClass.ELECTRICAL_CONDUCTIVITY: set(UnitOfElectricalConductivity),
     SensorDeviceClass.CURRENT: set(UnitOfElectricCurrent),
     SensorDeviceClass.DATA_RATE: set(UnitOfDataRate),
     SensorDeviceClass.DATA_SIZE: set(UnitOfInformation),
@@ -543,6 +572,7 @@ DEVICE_CLASS_UNITS: dict[SensorDeviceClass, set[type[StrEnum] | str | None]] = {
     SensorDeviceClass.NITROGEN_DIOXIDE: {CONCENTRATION_MICROGRAMS_PER_CUBIC_METER},
     SensorDeviceClass.NITROGEN_MONOXIDE: {CONCENTRATION_MICROGRAMS_PER_CUBIC_METER},
     SensorDeviceClass.NITROUS_OXIDE: {CONCENTRATION_MICROGRAMS_PER_CUBIC_METER},
+    SensorDeviceClass.ORP: set(UnitOfElectricPotential),
     SensorDeviceClass.OZONE: {CONCENTRATION_MICROGRAMS_PER_CUBIC_METER},
     SensorDeviceClass.PH: {None},
     SensorDeviceClass.PM1: {CONCENTRATION_MICROGRAMS_PER_CUBIC_METER},
@@ -558,9 +588,11 @@ DEVICE_CLASS_UNITS: dict[SensorDeviceClass, set[type[StrEnum] | str | None]] = {
         SIGNAL_STRENGTH_DECIBELS,
         SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
     },
+    SensorDeviceClass.SODIUM: {CONCENTRATION_PARTS_PER_MILLION},
     SensorDeviceClass.SOUND_PRESSURE: set(UnitOfSoundPressure),
     SensorDeviceClass.SPEED: set(UnitOfSpeed).union(set(UnitOfVolumetricFlux)),
     SensorDeviceClass.SULPHUR_DIOXIDE: {CONCENTRATION_MICROGRAMS_PER_CUBIC_METER},
+    SensorDeviceClass.TOTAL_DISSOLVED_SOLIDS: {CONCENTRATION_PARTS_PER_MILLION},
     SensorDeviceClass.TEMPERATURE: set(UnitOfTemperature),
     SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS: {
         CONCENTRATION_MICROGRAMS_PER_CUBIC_METER
@@ -589,6 +621,7 @@ DEVICE_CLASS_STATE_CLASSES: dict[SensorDeviceClass, set[SensorStateClass]] = {
     SensorDeviceClass.AQI: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.ATMOSPHERIC_PRESSURE: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.BATTERY: {SensorStateClass.MEASUREMENT},
+    SensorDeviceClass.CL: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.CO: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.CO2: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.CURRENT: {SensorStateClass.MEASUREMENT},
@@ -597,6 +630,7 @@ DEVICE_CLASS_STATE_CLASSES: dict[SensorDeviceClass, set[SensorStateClass]] = {
     SensorDeviceClass.DATE: set(),
     SensorDeviceClass.DISTANCE: set(SensorStateClass),
     SensorDeviceClass.DURATION: set(SensorStateClass),
+    SensorDeviceClass.ELECTRICAL_CONDUCTIVITY: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.ENERGY: {
         SensorStateClass.TOTAL,
         SensorStateClass.TOTAL_INCREASING,
@@ -613,6 +647,7 @@ DEVICE_CLASS_STATE_CLASSES: dict[SensorDeviceClass, set[SensorStateClass]] = {
     SensorDeviceClass.NITROGEN_DIOXIDE: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.NITROGEN_MONOXIDE: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.NITROUS_OXIDE: {SensorStateClass.MEASUREMENT},
+    SensorDeviceClass.ORP: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.OZONE: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.PH: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.PM1: {SensorStateClass.MEASUREMENT},
@@ -625,9 +660,11 @@ DEVICE_CLASS_STATE_CLASSES: dict[SensorDeviceClass, set[SensorStateClass]] = {
     SensorDeviceClass.PRESSURE: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.REACTIVE_POWER: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.SIGNAL_STRENGTH: {SensorStateClass.MEASUREMENT},
+    SensorDeviceClass.SODIUM: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.SOUND_PRESSURE: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.SPEED: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.SULPHUR_DIOXIDE: {SensorStateClass.MEASUREMENT},
+    SensorDeviceClass.TOTAL_DISSOLVED_SOLIDS: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.TEMPERATURE: {SensorStateClass.MEASUREMENT},
     SensorDeviceClass.TIMESTAMP: set(),
     SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS: {SensorStateClass.MEASUREMENT},
